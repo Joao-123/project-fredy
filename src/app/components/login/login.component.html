@@ -8,32 +8,76 @@
 					<input
             placeholder="C.I."
             autocomplete="off"
-            type="number"
+            type="text"
             name="userName"
             id="userName"
             formControlName="ci"
           >
-					<input autocomplete="off" type="text" formControlName="name" placeholder="Nombres" required>
-					<input autocomplete="off" type="text" formControlName="lastname" placeholder="Apellidos" required>
-					<input autocomplete="off" type="email" formControlName="email" placeholder="Email" required>
-					<input autocomplete="off" type="password" formControlName="pswd" placeholder="Contraseña" required>
-					<input autocomplete="off" type="password" formControlName="cpswd" placeholder="Confirmar contraseña" required>
+					<small *ngIf="ciValidSignUp">{{msjErrorSignUp.ci}}</small>
+					<input
+						placeholder="Nombres"
+						autocomplete="off"
+						type="text"
+						formControlName="name"
+					>
+					<small *ngIf="nameValidSignUp">{{msjErrorSignUp.name}}</small>
+					<input
+						placeholder="Apellidos"
+						autocomplete="off"
+						type="text"
+						formControlName="lastName"
+					>
+					<small *ngIf="lastNameValidSignUp">{{msjErrorSignUp.lastName}}</small>
+					<!-- <input autocomplete="off" type="email" formControlName="email" placeholder="Email"> -->
+					<input
+					placeholder="Celular"
+						autocomplete="off"
+						type="text"
+						formControlName="cell"
+					>
+					<small *ngIf="cellValidSignUp">{{msjErrorSignUp.cell}}</small>
+					<input
+						placeholder="Contraseña"
+						autocomplete="off"
+						type="password"
+						formControlName="password"
+					>
+					<small *ngIf="passwordValidSignUp">{{msjErrorSignUp.password}}</small>
+					<input
+						placeholder="Confirmar contraseña"
+						autocomplete="off"
+						type="password"
+						formControlName="passwordConfirm"
+					>
+					<small *ngIf="passwordConfirmValidSignUp">{{msjErrorSignUp.passwordConfirm}}</small>
 					<button type="submit">Enviar</button>
 				</form>
 			</div>
 
 			<div class="login">
-				<form [formGroup]="formSignIn" (ngSubmit)="signIn()">
+				<form [formGroup]="formLogIn" (ngSubmit)="logIn()">
 					<label for="chk" aria-hidden="true">Inicio sesion</label>
-					<input autocomplete="off" type="number" formControlName="ci" placeholder="C.I.">
-					<input autocomplete="off" type="password" formControlName="pswd" placeholder="Contraseña">
+					<input
+						placeholder="C.I."
+						autocomplete="off"
+						type="text"
+						formControlName="ci"
+					>
+					<small *ngIf="ciValidLogIn">{{msjErrorLogIn.ci}}</small>
+					<input
+						placeholder="Contraseña"
+						autocomplete="off"
+						type="password"
+						formControlName="password"
+					>
+					<small *ngIf="passwordValidLogIn">{{msjErrorLogIn.password}}</small>
 					<button>Empezar</button>
 				</form>
 			</div>
 	</div>
 </div>
 
-<div class="msg-float">
+<div [className]="send? 'msg-float msg-active' : 'msg-float'">
   <div class="square-msg">
     <div class="msg">Enviando datos..</div>
     <img src="assets/img/progress2.gif">
