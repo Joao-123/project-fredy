@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UsersService } from "../../services/users.service";
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public userService: UsersService) {
     this.createFormLogIn();
     this.createFormSignUp();
   }
@@ -59,6 +60,20 @@ export class LoginComponent implements OnInit {
       this.formSignUp.markAllAsTouched();
     } else {
       this.send = true;
+      const help = this.formSignUp.value;
+
+      const mesero={
+        ci: help.ci,
+        nombres: help.name,
+        apellidos: help.lastName,
+        cell: help.cell,
+        estado: 'activo',
+        password: help.password,
+      }
+      this.userService.addMesero(mesero).subscribe(
+        data => {
+          console.log(data);
+        });
       setTimeout(() => {
         this.send = false;
       }, 2000);
