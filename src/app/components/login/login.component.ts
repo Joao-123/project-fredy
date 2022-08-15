@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UsersService } from "../../services/users.service";
 
 @Component({
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
-  constructor(private fb: FormBuilder, public userService: UsersService) {
+  constructor(private fb: FormBuilder, public userService: UsersService, private router:Router) {
     this.createFormLogIn();
     this.createFormSignUp();
   }
@@ -70,6 +71,7 @@ export class LoginComponent implements OnInit {
         estado: 'activo',
         password: help.password,
       }
+
       this.userService.addMesero(mesero).subscribe(
         data => {
           console.log(data);
@@ -85,6 +87,23 @@ export class LoginComponent implements OnInit {
       this.formLogIn.markAllAsTouched();
     } else {
       this.send = true;
+      const help = this.formLogIn.value;
+
+      const mesero = {
+        ci: help.ci,
+        password: help.password
+      };
+
+      this.userService.login(mesero).subscribe(
+        data => {
+          console.log(data);
+          if (data.msj === 'not found') {
+            console.log('credenciales invalidas');
+          } else {
+            localStorage.setItem('userLog', JSON.stringify(data))
+            this.router.navigate(['/home']);
+          }
+        });
       setTimeout(() => {
         this.send = false;
       }, 2000);

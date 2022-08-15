@@ -23,6 +23,11 @@ export class UsersService {
     return this.http.post('http://localhost:8000/meseros/add', JSON.stringify(mesero));
   }
 
+  login(mesero: any): Observable<any>{
+    console.log(mesero);
+    return this.http.post('http://localhost:8000/meseros/login', JSON.stringify(mesero));
+  }
+
   // addMesero(mesero: any): Observable<any>{
   //   let headers = new HttpHeaders({
   //     'Content-Type': 'application/json',
