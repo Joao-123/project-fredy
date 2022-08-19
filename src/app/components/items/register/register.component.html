@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="main">
+    <form class="form" [formGroup]="formProduct" (submit)="saveAll()">
+      <div class="title">Registrar producto</div>
+      <input
+        placeholder="Nombre"
+        autocomplete="off"
+        type="text"
+        formControlName="nombre"
+      >
+      <small *ngIf="nombreValid">{{msjError.nombre}}</small>
+      <input
+        placeholder="Precio"
+        autocomplete="off"
+        type="text"
+        formControlName="precio"
+      >
+      <small *ngIf="precioValid">{{msjError.precio}}</small>
+      <input
+        placeholder="Cantidad"
+        autocomplete="off"
+        type="text"
+        formControlName="stock"
+      >
+      <small *ngIf="stockValid">{{msjError.stock}}</small>
+
+      <div class="buttons">
+        <button type="submit" class="">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div [className]="send? 'msg-float msg-active' : 'msg-float'">
+  <div class="square-msg">
+    <div class="msg">Enviando datos..</div>
+    <img src="assets/img/progress2.gif">
+  </div>
+</div>

@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'project-fredy';
+  current = localStorage.getItem('userLog')? true: false;
+
+  constructor() {
+  }
 }

@@ -1,0 +1,24 @@
+<div class="container">
+  <nav class="nav-content" [ngClass]="{'active-nav': nav}">
+    <img src="/assets/img/madera0.jpg" alt="" class="nav-logo">
+
+    <ul class="links">
+      <li>
+        <a class="link" (click)="open()" routerLink="/home" routerLinkActive="active">Inicio</a>
+      </li>
+      <li>
+        <a class="link" (click)="open()" routerLink="/items" routerLinkActive="active">Productos</a>
+      </li>
+      <!-- <li>
+        <a class="link" routerLink="items/add" routerLinkActive="active">Chicas</a>
+      </li> -->
+      <li>
+        <a class="link" (click)="open()" routerLink="/sales" routerLinkActive="active">Ventas</a>
+      </li>
+    </ul>
+
+    <div (click)="open()" class="hamb"><i class="bi bi-card-list"></i></div>
+    <div (click)="open()" class="close"><i class="bi bi-x-circle"></i></div>
+
+  </nav>
+</div>
