@@ -39,6 +39,7 @@ export class RegisterComponent implements OnInit {
       const product = {
         nombre: help.nombre,
         precio: help.precio,
+        manilla: 'rojo',
         stock: help.stock
       };
 

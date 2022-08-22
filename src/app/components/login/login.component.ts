@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from "../../services/users.service";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ export class LoginComponent implements OnInit {
   formSignUp!: FormGroup;
   formLogIn!: FormGroup;
   send = false;
+  credentialsInvalid = false
   msjErrorSignUp = {
     ci:'',
     name: '',
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
-  constructor(private fb: FormBuilder, public userService: UsersService, private router:Router) {
+  constructor(private fb: FormBuilder, public userService: UsersService, private router:Router, public _location: Location) {
     this.createFormLogIn();
     this.createFormSignUp();
   }
@@ -63,16 +65,18 @@ export class LoginComponent implements OnInit {
       this.send = true;
       const help = this.formSignUp.value;
 
-      const mesero={
+      const usuario={
         ci: help.ci,
         nombres: help.name,
         apellidos: help.lastName,
         cell: help.cell,
         estado: 'activo',
         password: help.password,
+        edad: 22,
+        rol: 1
       }
 
-      this.userService.addMesero(mesero).subscribe(
+      this.userService.addUsuario(usuario).subscribe(
         data => {
           console.log(data);
         });
@@ -89,24 +93,28 @@ export class LoginComponent implements OnInit {
       this.send = true;
       const help = this.formLogIn.value;
 
-      const mesero = {
+      const usuario = {
         ci: help.ci,
         password: help.password
       };
 
-      this.userService.login(mesero).subscribe(
+      this.userService.login(usuario).subscribe(
         data => {
-          console.log(data);
           if (data.msj === 'not found') {
-            console.log('credenciales invalidas');
+            this.send = false;
+            this.credentialsInvalid = true
+            this.formLogIn.reset();
+            setTimeout(() => {
+              this.credentialsInvalid = false;
+            }, 1400);
           } else {
             localStorage.setItem('userLog', JSON.stringify(data))
-            this.router.navigate(['/home']);
+            location.reload()
           }
         });
-      setTimeout(() => {
-        this.send = false;
-      }, 2000);
+      // setTimeout(() => {
+      //   this.send = false;
+      // }, 2000);
     }
   }
 

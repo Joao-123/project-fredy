@@ -1,62 +1,9 @@
 <div class="container-p">
   <div class="main">
-		<input type="checkbox" id="chk" aria-hidden="true">
 
 			<div class="signup">
-				<form [formGroup]="formSignUp" (ngSubmit)="register()">
-					<label for="chk" aria-hidden="true">Registrarse</label>
-					<input
-            placeholder="C.I."
-            autocomplete="off"
-            type="text"
-            name="userName"
-            id="userName"
-            formControlName="ci"
-          >
-					<small *ngIf="ciValidSignUp">{{msjErrorSignUp.ci}}</small>
-					<input
-						placeholder="Nombres"
-						autocomplete="off"
-						type="text"
-						formControlName="name"
-					>
-					<small *ngIf="nameValidSignUp">{{msjErrorSignUp.name}}</small>
-					<input
-						placeholder="Apellidos"
-						autocomplete="off"
-						type="text"
-						formControlName="lastName"
-					>
-					<small *ngIf="lastNameValidSignUp">{{msjErrorSignUp.lastName}}</small>
-					<!-- <input autocomplete="off" type="email" formControlName="email" placeholder="Email"> -->
-					<input
-					placeholder="Celular"
-						autocomplete="off"
-						type="text"
-						formControlName="cell"
-					>
-					<small *ngIf="cellValidSignUp">{{msjErrorSignUp.cell}}</small>
-					<input
-						placeholder="Contraseña"
-						autocomplete="off"
-						type="password"
-						formControlName="password"
-					>
-					<small *ngIf="passwordValidSignUp">{{msjErrorSignUp.password}}</small>
-					<input
-						placeholder="Confirmar contraseña"
-						autocomplete="off"
-						type="password"
-						formControlName="passwordConfirm"
-					>
-					<small *ngIf="passwordConfirmValidSignUp">{{msjErrorSignUp.passwordConfirm}}</small>
-					<button type="submit">Enviar</button>
-				</form>
-			</div>
-
-			<div class="login">
 				<form [formGroup]="formLogIn" (ngSubmit)="logIn()">
-					<label for="chk" aria-hidden="true">Inicio sesion</label>
+					<label for="chk" aria-hidden="true">Inicio Sesión</label>
 					<input
 						placeholder="C.I."
 						autocomplete="off"
@@ -74,6 +21,57 @@
 					<button>Empezar</button>
 				</form>
 			</div>
+
+			<form [formGroup]="formSignUp" (ngSubmit)="register()">
+				<label for="chk" aria-hidden="true">Registrarse</label>
+				<input
+					placeholder="C.I."
+					autocomplete="off"
+					type="text"
+					name="userName"
+					id="userName"
+					formControlName="ci"
+				>
+				<small *ngIf="ciValidSignUp">{{msjErrorSignUp.ci}}</small>
+				<input
+					placeholder="Nombres"
+					autocomplete="off"
+					type="text"
+					formControlName="name"
+				>
+				<small *ngIf="nameValidSignUp">{{msjErrorSignUp.name}}</small>
+				<input
+					placeholder="Apellidos"
+					autocomplete="off"
+					type="text"
+					formControlName="lastName"
+				>
+				<small *ngIf="lastNameValidSignUp">{{msjErrorSignUp.lastName}}</small>
+				<!-- <input autocomplete="off" type="email" formControlName="email" placeholder="Email"> -->
+				<input
+				placeholder="Celular"
+					autocomplete="off"
+					type="text"
+					formControlName="cell"
+				>
+				<small *ngIf="cellValidSignUp">{{msjErrorSignUp.cell}}</small>
+				<input
+					placeholder="Contraseña"
+					autocomplete="off"
+					type="password"
+					formControlName="password"
+				>
+				<small *ngIf="passwordValidSignUp">{{msjErrorSignUp.password}}</small>
+				<input
+					placeholder="Confirmar contraseña"
+					autocomplete="off"
+					type="password"
+					formControlName="passwordConfirm"
+				>
+				<small *ngIf="passwordConfirmValidSignUp">{{msjErrorSignUp.passwordConfirm}}</small>
+				<button type="submit">Enviar</button>
+			</form>
+
 	</div>
 </div>
 
@@ -81,5 +79,11 @@
   <div class="square-msg">
     <div class="msg">Enviando datos..</div>
     <img src="assets/img/progress2.gif">
+  </div>
+</div>
+
+<div [className]="credentialsInvalid? 'msg-float msg-active' : 'msg-float'">
+  <div class="square-msg">
+    <div class="msg">Credenciales invalidas</div>
   </div>
 </div>

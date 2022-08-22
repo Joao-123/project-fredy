@@ -8,19 +8,25 @@ import { RegisterComponent as ItemsRegisterComponent } from "./components/items/
 import { ListComponent as ItemsListComponent } from "./components/items/list/list.component";
 import { SalesComponent } from './components/sales/sales.component';
 
-const routes: Routes = [
+
+const routesOut: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: '**', pathMatch: 'full', redirectTo: 'login' }
+];
+
+const routesIn: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'sales', component: SalesComponent },
-  //{ path: 'second-component', component: SecondComponent },
   { path: 'items', component: ItemsComponent, children: [
     { path: 'add', component: ItemsRegisterComponent},
     { path: 'list', component: ItemsListComponent},
     { path: '',  redirectTo: 'list', pathMatch: 'full' }
   ]},
-  { path: '',  redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent },
+  { path: '**', pathMatch: 'full', redirectTo: 'home' }
+  // { path: '',  redirectTo: '/home', pathMatch: 'full' },
+  // { path: '**', component: PageNotFoundComponent },
 ];
+const routes = localStorage.getItem('userLog')? routesIn: routesOut;
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {useHash: true})],

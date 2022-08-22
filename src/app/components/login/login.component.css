@@ -1,6 +1,7 @@
 .container-p {
   /* Variables */
-  --size-form: 625px;
+  --size-form: 380px;
+  /* --size-form: 625px; */
   --background-img: url("/assets/img/fondo5.jpg");
   /* --background-img: url("/assets/img/madera0.jpg"); */
 	/* background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); */
@@ -33,10 +34,6 @@
 	/* background: transparent; */
 	border-radius: 10px;
 	box-shadow: 5px 20px 50px #000;
-}
-
-#chk{
-	display: none;
 }
 
 .signup{
@@ -110,28 +107,6 @@ button:hover {
   outline-color: rgba(49, 138, 172, 0);
   outline-offset: 80px;
   text-shadow: 1px 1px 6px #fff;
-}
-.login{
-	height: calc(var(--size-form) - 100px); /*tamaño de formulario*/
-	background: rgb(240, 236, 236);
-	border-radius: 60% / 10%;
-	transform: translateY(-180px);
-	transition: .8s ease-in-out;
-}
-.login label{
-	color: #603b8a;
-	transform: scale(.6);
-}
-
-#chk:checked ~ .login{
-	transform: translateY(calc(var(--size-form) * -1)); /*tamaño de formulario*/
-}
-#chk:checked ~ .login label{
-	transform: scale(1);
-  padding-top: 10px
-}
-#chk:checked ~ .signup label{
-	transform: scale(.6);
 }
 
 .msg-float {
