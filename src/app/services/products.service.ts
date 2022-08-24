@@ -18,4 +18,8 @@ export class ProductsService {
     console.log(product);
     return this.http.post('http://localhost:8000/productos/list', JSON.stringify(product));
   }
+
+  getAll(): Observable<Object>{
+    return this.http.get('http://localhost:8000/productos/all');
+  }
 }

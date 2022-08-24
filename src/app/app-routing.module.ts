@@ -7,6 +7,8 @@ import { ItemsComponent } from './components/items/items.component';
 import { RegisterComponent as ItemsRegisterComponent } from "./components/items/register/register.component";
 import { ListComponent as ItemsListComponent } from "./components/items/list/list.component";
 import { SalesComponent } from './components/sales/sales.component';
+import { RegisterComponent as SalesRegisterComponent } from "./components/sales/register/register.component";
+import { ListComponent as SalesListComponent } from "./components/sales/list/list.component";
 
 
 const routesOut: Routes = [
@@ -16,7 +18,11 @@ const routesOut: Routes = [
 
 const routesIn: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'sales', component: SalesComponent },
+  { path: 'sales', component: SalesComponent, children: [
+    { path: 'add', component: SalesRegisterComponent},
+    { path: 'list', component: SalesListComponent},
+    { path: '', redirectTo: 'add', pathMatch: 'full' },
+  ]},
   { path: 'items', component: ItemsComponent, children: [
     { path: 'add', component: ItemsRegisterComponent},
     { path: 'list', component: ItemsListComponent},

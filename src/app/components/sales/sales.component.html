@@ -1,1 +1,7 @@
-<p>sales works!</p>
+<div class="container">
+  <div class="nav-sales">
+    <button type="button" class="btn" [routerLink]="['add']" routerLinkActive="active"><i class="bi bi-cart-plus"></i> Agregar</button>
+    <button type="button" class="btn" routerLink="list" routerLinkActive="active"><i class="bi bi-cart-check"></i> Ver</button>
+  </div>
+  <router-outlet></router-outlet>
+</div>

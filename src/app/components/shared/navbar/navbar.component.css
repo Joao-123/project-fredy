@@ -78,7 +78,7 @@
 
 .active {
   outline-offset: 80px;
-  text-shadow: 1px 1px 6px rgb(86, 1, 245);
+  text-shadow: 1px 1px 6px rgb(255, 255, 255);
 }
 
 @media (min-width:768px) {

@@ -114,7 +114,7 @@ export class LoginComponent implements OnInit {
         });
       // setTimeout(() => {
       //   this.send = false;
-      // }, 2000);
+      // }, 5000);
     }
   }
 

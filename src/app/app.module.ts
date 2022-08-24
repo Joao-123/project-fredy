@@ -12,9 +12,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { ItemsComponent } from './components/items/items.component';
+import { RegisterComponent as ItemsRegisterComponent } from './components/items/register/register.component';
+import { ListComponent as ItemsListComponent } from './components/items/list/list.component';
 import { SalesComponent } from './components/sales/sales.component';
-import { RegisterComponent } from './components/items/register/register.component';
-import { ListComponent } from './components/items/list/list.component';
+import { RegisterComponent as SalesRegisterComponent } from "./components/sales/register/register.component";
+import { ListComponent as SalesListComponent } from "./components/sales/list/list.component";
 
 @NgModule({
   declarations: [
@@ -25,8 +27,10 @@ import { ListComponent } from './components/items/list/list.component';
     NavbarComponent,
     ItemsComponent,
     SalesComponent,
-    RegisterComponent,
-    ListComponent
+    ItemsRegisterComponent,
+    ItemsListComponent,
+    SalesRegisterComponent,
+    SalesListComponent
   ],
   imports: [
     BrowserModule,

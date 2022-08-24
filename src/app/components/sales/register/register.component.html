@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="main">
+    <form class="form" [formGroup]="formVenta" (submit)="save()">
+      <fieldset class="principal">
+        <legend class="title-form">Venta a nombre de {{capitalize(user.nombres)}}</legend>
+
+        <fieldset class="productos secundarios">
+          <legend class="title-form">Productos <i class="bi bi-bag-check"></i></legend>
+          <div (click)="addProducto()" class="button-add"><i class="bi bi-patch-plus-fill"></i></div>
+
+          <div class="group-productos" formArrayName="productos">
+            <div class="product" *ngFor="let item of productos.controls;  index as i" [formGroupName]="i">
+              <select class="select-principal" id="productos" (change)="setProduct(i)">
+                <option *ngFor="let productoOption of listProuct">{{capitalize(productoOption.nombre)}}</option>
+              </select>
+              <div class="product-detail">Venta: {{item.value|json}}Bs</div>
+              <div class="product-detail">Cantidad: 1</div>
+              <div class="product-detail">Descuento: 100Bs</div>
+              <div class="product-detail">Compra: 25Bs</div>
+              <div class="product-detail">Ganancia: 75Bs</div>
+              <button type="button" (click)="eliminarProducto(i)">Elimnar</button>
+            </div>
+          </div>
+
+        </fieldset>
+
+        <fieldset class="mujeres secundarios">
+          <legend class="title-form">Mujeres <i class="bi bi-hearts"></i></legend>
+          <div (click)="addMujer()" class="button-add"><i class="bi bi-patch-plus-fill"></i></div>
+
+          <div class="group-mujer" formArrayName="mujeres">
+            <div class="mujer" *ngFor="let item of mujeres.controls;  index as i" [formGroupName]="i">
+              <select class="select-principal" name="nombre-m" id="" (change)="setWoman(i)">
+                <option *ngFor="let mujerOption of listWomen" value="producOption">{{capitalize(mujerOption.nombres)}}</option>
+              </select>
+              <div class="product-detail">Manilla:
+                <select class="" name="color" id="col">
+                  <option value="volvo">Verde</option>
+                  <option value="volvo">Azul</option>
+                  <option value="volvo">Rojo</option>
+                </select>
+              </div>
+              <button type="button" (click)="eliminarMujer(i)">Elimnar</button>
+            </div>
+          </div>
+
+        </fieldset>
+
+        <fieldset class="detail secundarios">
+          <legend class="title-form">Detalles <i class="bi bi-journal-text"></i></legend>
+              <div class="detail-total">Ganancia Casa: 200Bs</div>
+              <div class="detail-total">Ganancia Chica: 1</div>
+              <div class="detail-total">Total a Pagar: 100Bs</div>
+        </fieldset>
+
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<div [className]="send? 'msg-float msg-active' : 'msg-float'">
+  <div class="square-msg">
+    <div class="msg">Enviando datos..</div>
+    <img src="assets/img/progress2.gif">
+  </div>
+</div>
