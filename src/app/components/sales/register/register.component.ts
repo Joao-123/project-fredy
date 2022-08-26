@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { SalesService } from 'src/app/services/sales.service';
 import { WomenService } from 'src/app/services/women.service';
-import { ProductsService } from "../../../services/products.service";
+import { ProductsService } from "src/app/services/products.service";
 
 @Component({
   selector: 'app-register',
@@ -15,11 +16,15 @@ export class RegisterComponent implements OnInit {
 
   formVenta: FormGroup
   listProuct: any;
+  listProuctHelp: any[]=[];
   listWomen: any;
+  listWomenHelp: any[]=[];
+  total = 0
 
   constructor(fb: FormBuilder,
     public productService: ProductsService,
-    public womenService: WomenService) 
+    public womenService: WomenService,
+    public sellService: SalesService)
     {
     this.user = JSON.parse(localStorage.getItem('userLog')|| '{}');
     console.log(this.user);
@@ -46,37 +51,52 @@ export class RegisterComponent implements OnInit {
   addMujer() {
     const control = (<FormArray>this.formVenta.get('mujeres'));
     control.push(this.fb.group({
-      nombres: ['', [Validators.required]],
-      manilla: ['', ],
+      data: ['', ],
+      manilla: ['Blanco', ]
     }))
   }
   // push new form control when user clicks add button
   addProducto() {
     const control = <FormArray>this.formVenta.controls['productos'];
     control.push(this.fb.group({
-      nombre: ['', ],
-      precio: ['', ],
-      cantidad: ['', ],
-      manilla: ['', ],
-      compra: ['', ],
-      ganancia: ['', ],
+      data: '',
+      cantidad: 1,
+      descuento: null,
     }))
   }
 
   eliminarProducto(lessonIndex: number) {
     this.productos.removeAt(lessonIndex);
+    this.calcTotal()
   }
 
   eliminarMujer(lessonIndex: number) {
     this.mujeres.removeAt(lessonIndex);
   }
 
-  setProduct(i: number) {
+  setProduct(data: any) {
     console.log('setProduct');
+    console.log(data);
+    this.listProuctHelp.push(data)
+    console.log(this.listProuctHelp);
+
+    this.calcTotal();
   }
 
-  setWoman(i: number) {
+  setWoman(data: any) {
     console.log('setWoman');
+    console.log(data);
+    this.listWomenHelp.push(data)
+
+    this.calcTotal();
+  }
+
+  calcTotal() {
+    this.total = 0;
+    this.productos.value.forEach((x:any) => {
+      this.total += (x.cantidad*x.data.precio)
+      this.total -= x.descuento
+    });
   }
 
   ngOnInit(): void {
@@ -100,7 +120,19 @@ export class RegisterComponent implements OnInit {
   }
 
   save() {
-    console.log('save');
+    const data={
+      productos: this.productos.value,
+      mujeres: this.mujeres.value,
+      user: this.user,
+      detalles: {
+        total: this.total
+      }
+    }
+
+    this.sellService.addSells(data).subscribe(
+      data => {
+        console.log(data);
+      });
   }
 
 }

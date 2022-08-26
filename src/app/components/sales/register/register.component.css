@@ -55,7 +55,7 @@ fieldset.secundarios {
 	align-items: center;
 	padding: 5% 2%;
 	margin: 2% auto;
-	background: blanchedalmond;
+	background: rgb(226, 226, 245);
 	border-radius: 5px;
   box-shadow: inset 0rem 0rem 20px 3px rgb(0 18 255 / 83%);
 }
@@ -78,7 +78,7 @@ fieldset.secundarios {
 	align-items: center;
 	padding: 5% 2%;
 	margin: 2% auto;
-	background: blanchedalmond;
+	background: rgb(242, 226, 243);
 	border-radius: 5px;
   box-shadow: inset 0rem 0rem 20px 3px rgba(255, 0, 170, 0.83);
 }

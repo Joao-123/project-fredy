@@ -10,14 +10,14 @@
 
           <div class="group-productos" formArrayName="productos">
             <div class="product" *ngFor="let item of productos.controls;  index as i" [formGroupName]="i">
-              <select class="select-principal" id="productos" (change)="setProduct(i)">
-                <option *ngFor="let productoOption of listProuct">{{capitalize(productoOption.nombre)}}</option>
+              <select class="select-principal" name="productoOption" formControlName="data" (ngModelChange)="setProduct($event)">
+                <option *ngFor="let productoOption of listProuct" [ngValue]="productoOption">{{capitalize(productoOption.nombre)}}</option>
               </select>
-              <div class="product-detail">Venta: {{item.value|json}}Bs</div>
-              <div class="product-detail">Cantidad: 1</div>
-              <div class="product-detail">Descuento: 100Bs</div>
-              <div class="product-detail">Compra: 25Bs</div>
-              <div class="product-detail">Ganancia: 75Bs</div>
+              <div class="product-detail">Venta: {{item.value.data.precio|json}}Bs</div>
+              <div class="product-detail"><label for=""> Cantidad:</label><input formControlName="cantidad" type="number" (input)="calcTotal()"></div>
+              <div class="product-detail"><label for=""> Descuento:</label><input formControlName="descuento" type="number" (input)="calcTotal()"></div>
+              <!-- <div class="product-detail">Compra: 25Bs</div>
+              <div class="product-detail">Ganancia: 75Bs</div> -->
               <button type="button" (click)="eliminarProducto(i)">Elimnar</button>
             </div>
           </div>
@@ -30,15 +30,15 @@
 
           <div class="group-mujer" formArrayName="mujeres">
             <div class="mujer" *ngFor="let item of mujeres.controls;  index as i" [formGroupName]="i">
-              <select class="select-principal" name="nombre-m" id="" (change)="setWoman(i)">
-                <option *ngFor="let mujerOption of listWomen" value="producOption">{{capitalize(mujerOption.nombres)}}</option>
+              <select class="select-principal" formControlName="data" (ngModelChange)="setWoman($event)">
+                <option *ngFor="let mujerOption of listWomen" [ngValue]="mujerOption">{{capitalize(mujerOption.nombres)}}</option>
               </select>
               <div class="product-detail">Manilla:
-                <select class="" name="color" id="col">
-                  <option value="volvo">Verde</option>
-                  <option value="volvo">Azul</option>
-                  <option value="volvo">Rojo</option>
+                <select class="" name="color" id="col" formControlName="manilla">
+                  <option value="Blanco">Blanco</option>
+                  <option *ngFor="let productoHabilitado of listProuctHelp">{{productoHabilitado.manilla}}</option>
                 </select>
+                <!-- <div class="product-detail">{{item.value|json}}</div> -->
               </div>
               <button type="button" (click)="eliminarMujer(i)">Elimnar</button>
             </div>
@@ -48,10 +48,12 @@
 
         <fieldset class="detail secundarios">
           <legend class="title-form">Detalles <i class="bi bi-journal-text"></i></legend>
-              <div class="detail-total">Ganancia Casa: 200Bs</div>
-              <div class="detail-total">Ganancia Chica: 1</div>
-              <div class="detail-total">Total a Pagar: 100Bs</div>
+              <!-- <div class="detail-total">Ganancia Casa: 200Bs</div>
+              <div class="detail-total">Ganancia Chica: 1</div> -->
+              <div class="detail-total">Total a Pagar: {{total}}Bs</div>
         </fieldset>
+
+        <button type="submit" >Guardar</button>
 
       </fieldset>
     </form>
